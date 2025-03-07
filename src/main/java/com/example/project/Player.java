@@ -107,19 +107,7 @@ public class Player{
         return "Nothing";
     }
 
-    public void sortAllCards(){
-        for(int i = 1; i < allCards.size(); i++) { //iterate thorugh all the cards to sort in order 
-            int ind = i;
-            while(ind - 1 >= 0 && cardInFront(allCards.get(i), allCards.get(ind - 1))) { 
-                ind--;
-            }
-            Card temp = allCards.get(i);  
-            for(int j = i - 1; j >= ind; j --) {
-                allCards.set(j + 1, allCards.get(j));
-            }
-            allCards.set(ind, temp);
-        }
-    }
+    public void SortCards(){} 
 
     public ArrayList<Integer> findRankingFrequency(){ //returns how many of the type of card there is 
         ArrayList<Integer> rankFreq = new ArrayList<Integer>();
