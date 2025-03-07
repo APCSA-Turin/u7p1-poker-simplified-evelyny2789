@@ -26,25 +26,25 @@ public class Player{
         }
            
         sortAllCards(); //Sorts all Cards
-        int consecutiveCount = 0;
+        int consecutive = 0;
         for(int i = 0; i < allCards.size() - 1; i++) { //Check how many consecutive numbers there rae 
             if(Utility.getRankValue(allCards.get(i).getRank()) == Utility.getRankValue(allCards.get(i + 1).getRank()) - 1) {
-                consecutiveCount++;
+                consecutive++;
             }
         }
 
-        int pairCount = 0;
-        boolean threeKind = false;
-        boolean fourKind = false;
+        int pair = 0;
+        boolean three = false;
+        boolean four = false;
         for(int i = 0; i < findRankingFrequency().size(); i ++) { //Checks how many pairs there are
             if(findRankingFrequency().get(i) == 2) {
-                pairCount++;
+                pair++;
             }
             else if(findRankingFrequency().get(i) == 3) { //Checks if there is three of a kind
-                threeKind = true;
+                three = true;
             }
             else if(findRankingFrequency().get(i) == 4) { //Checks if there is four of a kind
-                fourKind = true;
+                four = true;
             }
         }
 
@@ -55,53 +55,53 @@ public class Player{
             }
         }
         if(flush) {
-            if(consecutiveCount == 4) { //Checks if there is a straight
+            if(consecutive == 4) { //Checks if there is a straight
                 if(Utility.getRankValue(allCards.get(0).getRank()) == 10) { //Check if first of straight is 10
                     return "Royal Flush";
                 }
                 return "Straight Flush";
             }
-            if(fourKind) { //Check if there is a four of a kind in a flush
+            if(four) { //Check if there is a four of a kind in a flush
                 return "Four of a Kind";
             }
-            else if(pairCount > 0 && threeKind) { //Check if there is a Full House 
+            else if(pair > 0 && three) { //Check if there is a Full House 
                 return "Full House";
             }
             return "Flush"; 
         }
-        else if(fourKind) { //Checks four of a kind
+        else if(four) { //Checks four of a kind
             return "Four of a Kind";
         }
-        else if(pairCount > 0 && threeKind) {//Checks full house
+        else if(pair > 0 && three) {//Checks full house
             return "Full House";
         }
-        else if(consecutiveCount == 4) { //Checks if there is a straight (four in a row)
+        else if(consecutive == 4) { //Checks if there is a straight (four in a row)
             return "Straight";
         }
-        else if(threeKind) { //Checks if there is three of a card
+        else if(three) { //Checks if there is three of a card
             return "Three of a Kind";
         }
-        else if(pairCount == 2) { //Checks if there is twp pairs
+        else if(pair == 2) { //Checks if there is twp pairs
             return "Two Pair";
         }
-        else if (pairCount == 1) { //Checks if there is One Pair
+        else if (pair == 1) { //Checks if there is One Pair
             return "A Pair";
         }
 
-        int playerHigh = 0;
-        int communityHigh = 0;
+        int playerHighest = 0;
+        int communityHighest = 0;
         for(Card card : communityCards) { //Finds the highest card of the Community Cards
-            if(Utility.getRankValue(card.getRank()) > communityHigh) {
-                communityHigh = Utility.getRankValue(card.getRank());
+            if(Utility.getRankValue(card.getRank()) > communityHighest) {
+                communityHighest = Utility.getRankValue(card.getRank());
             }
         }
         for(Card card : hand) { //Finds the highest card of the player's hand cards 
-            if(Utility.getRankValue(card.getRank()) > playerHigh) {
-                playerHigh = Utility.getRankValue(card.getRank());
+            if(Utility.getRankValue(card.getRank()) > playerHighest) {
+                playerHighest = Utility.getRankValue(card.getRank());
             }
         }
 
-        if(playerHigh > communityHigh) { //if the player's hand's card is higher than the highest card of the community cards 
+        if(playerHighest > communityHighest) { //if the player's hand's card is higher than the highest card of the community cards 
             return "High Card";
         }
         return "Nothing";
@@ -109,15 +109,15 @@ public class Player{
 
     public void sortAllCards(){
         for(int i = 1; i < allCards.size(); i++) { //iterate thorugh all the cards to sort in order 
-            int index = i;
-            while(index - 1 >= 0 && cardInFront(allCards.get(i), allCards.get(index - 1))) { 
-                index--;
+            int ind = i;
+            while(ind - 1 >= 0 && cardInFront(allCards.get(i), allCards.get(ind - 1))) { 
+                ind--;
             }
             Card temp = allCards.get(i);  
-            for(int j = i - 1; j >= index; j --) {
+            for(int j = i - 1; j >= ind; j --) {
                 allCards.set(j + 1, allCards.get(j));
             }
-            allCards.set(index, temp);
+            allCards.set(ind, temp);
         }
     }
 
