@@ -20,7 +20,7 @@ public class TestPlayer {
         player.addCard(new Card("3", "♠"));
         player.addCard(new Card("5", "♣"));
         
-        // Add community cards (3 cards in total for this example)
+        //adds the community cards 
         ArrayList<Card> communityCards = new ArrayList<>();
         communityCards.add(new Card("4", "♠"));
         communityCards.add(new Card("8", "♣"));

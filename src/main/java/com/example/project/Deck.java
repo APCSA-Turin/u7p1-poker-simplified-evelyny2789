@@ -15,7 +15,7 @@ public class Deck{
         return cards;
     }
 
-    public  void initializeDeck(){ //hint.. use the utility class
+    public void initializeDeck(){ //hint.. use the utility class
         
     }
 
@@ -24,7 +24,12 @@ public class Deck{
     }
 
     public  Card drawCard(){
-       return new Card("","");
+        if (!isEmpty()){
+            cards.remove(0); 
+        } else {
+            return null; 
+        }
+        return new Card("","");
     }
 
     public  boolean isEmpty(){
